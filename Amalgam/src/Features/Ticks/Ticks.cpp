@@ -410,23 +410,27 @@ void CTickshiftHandler::Draw(CTFPlayer* pLocal)
 		int iChoke = std::max(I::ClientState->chokedcommands - (F::AntiAim.YawOn() ? F::AntiAim.AntiAimTicks() : 0), 0);
 		int iTicks = std::clamp(m_iShiftedTicks + iChoke, 0, m_iMaxShift);
 		float flRatio = float(iTicks) / m_iMaxShift;
-		int iSizeX = H::Draw.Scale(100, Scale_Round), iSizeY = H::Draw.Scale(12, Scale_Round);
-		int iPosX = dtPos.x - iSizeX / 2, iPosY = dtPos.y + fFont.m_nTall + H::Draw.Scale(4) + 1;
+		int iTotalWidth = H::Draw.Scale(103, Scale_Round);
+		int iTotalHeight = H::Draw.Scale(10, Scale_Round);
+		int iPosX = dtPos.x - iTotalWidth / 2;
+		int iPosY = dtPos.y + fFont.m_nTall + H::Draw.Scale(4) + 1;
 
-		H::Draw.StringOutlined(fFont, dtPos.x, dtPos.y + 2, Vars::Menu::Theme::Active.Value, Vars::Menu::Theme::Background.Value, ALIGN_TOP, std::format("Ticks {} / {}", iTicks, m_iMaxShift).c_str());
+		H::Draw.LineRect(iPosX, iPosY, iTotalWidth, iTotalHeight, Color_t(0, 0, 0, 255));
+
+		H::Draw.FillRect(iPosX + 1, iPosY + 1, iTotalWidth - 2, iTotalHeight - 2, Color_t(0, 0, 0, 119));
+
+		H::Draw.String(fFont, dtPos.x, dtPos.y + 2, Vars::Menu::Theme::Active.Value, ALIGN_TOP, std::format("Ticks {} / {}", iTicks, m_iMaxShift).c_str());
 		if (m_iWait)
-			H::Draw.StringOutlined(fFont, dtPos.x, dtPos.y + fFont.m_nTall + H::Draw.Scale(18, Scale_Round) + 1, Vars::Menu::Theme::Active.Value, Vars::Menu::Theme::Background.Value, ALIGN_TOP, "Not Ready");
+			H::Draw.String(fFont, dtPos.x, dtPos.y + fFont.m_nTall + H::Draw.Scale(18, Scale_Round) + 1, Vars::Menu::Theme::Active.Value, ALIGN_TOP, "Not Ready");
 
-		H::Draw.LineRoundRect(iPosX, iPosY, iSizeX, iSizeY, H::Draw.Scale(3, Scale_Round), Vars::Menu::Theme::Accent.Value, 16);
 		if (flRatio)
 		{
-			iSizeX -= H::Draw.Scale(2, Scale_Ceil) * 2, iSizeY -= H::Draw.Scale(2, Scale_Ceil) * 2;
-			iPosX += H::Draw.Scale(2, Scale_Round), iPosY += H::Draw.Scale(2, Scale_Round);
-			H::Draw.StartClipping(iPosX, iPosY, iSizeX * flRatio, iSizeY);
-			H::Draw.FillRoundRect(iPosX, iPosY, iSizeX, iSizeY, H::Draw.Scale(3, Scale_Round), Vars::Menu::Theme::Accent.Value, 16);
+			int iBarWidth = (iTotalWidth - 2) * flRatio;
+			H::Draw.StartClipping(iPosX + 1, iPosY + 1, iBarWidth, iTotalHeight - 2);
+			H::Draw.FillRect(iPosX + 1, iPosY + 1, iTotalWidth - 2, iTotalHeight - 2, Vars::Menu::Theme::Accent.Value);
 			H::Draw.EndClipping();
 		}
 	}
 	else
-		H::Draw.StringOutlined(fFont, dtPos.x, dtPos.y + 2, Vars::Menu::Theme::Active.Value, Vars::Menu::Theme::Background.Value, ALIGN_TOP, std::format("Speedhack x{}", Vars::Speedhack::Amount.Value).c_str());
+		H::Draw.String(fFont, dtPos.x, dtPos.y + 2, Vars::Menu::Theme::Active.Value, ALIGN_TOP, std::format("Speedhack x{}", Vars::Speedhack::Amount.Value).c_str());
 }

@@ -431,7 +431,7 @@ void CAimbotMelee::Run(CTFPlayer* pLocal, CTFWeaponBase* pWeapon, CUserCmd* pCmd
 	if (F::AimbotGlobal.ShouldHoldAttack(pWeapon))
 		pCmd->buttons |= IN_ATTACK;
 	if (!Vars::Aimbot::General::AimType.Value
-		|| !F::AimbotGlobal.ShouldAim() && pWeapon->m_flSmackTime() < 0.f)
+		/* || !F::AimbotGlobal.ShouldAim() && pWeapon->m_flSmackTime() < 0.f*/)
 		return;
 
 	if (RunSapper(pLocal, pWeapon, pCmd))

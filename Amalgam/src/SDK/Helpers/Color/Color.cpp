@@ -35,10 +35,11 @@ Color_t CColor::GetEntityDrawColor(CTFPlayer* pLocal, CBaseEntity* pEntity, bool
 		}
 		else if (H::Entities.IsFriend(pPlayer->entindex()))
 		{
-			out = F::PlayerUtils.m_vTags[F::PlayerUtils.TagToIndex(FRIEND_TAG)].m_tColor;
+			//out = F::PlayerUtils.m_vTags[F::PlayerUtils.TagToIndex(FRIEND_TAG)].m_tColor;
+			out = Vars::Colors::Friend.Value;
 			if (pType) *pType = 3;
 		}
-		else if (H::Entities.InParty(pPlayer->entindex()))
+		/*else if (H::Entities.InParty(pPlayer->entindex()))
 		{
 			out = F::PlayerUtils.m_vTags[F::PlayerUtils.TagToIndex(PARTY_TAG)].m_tColor;
 			if (pType) *pType = 4;
@@ -47,7 +48,7 @@ Color_t CColor::GetEntityDrawColor(CTFPlayer* pLocal, CBaseEntity* pEntity, bool
 		{
 			out = pTag->m_tColor;
 			if (pType) *pType = 5;
-		}
+		}*/
 	}
 
 	if (pTarget && pTarget->entindex() == G::AimTarget.m_iEntIndex)

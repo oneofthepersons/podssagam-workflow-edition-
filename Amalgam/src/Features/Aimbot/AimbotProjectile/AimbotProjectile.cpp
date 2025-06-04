@@ -1558,10 +1558,18 @@ int CAimbotProjectile::CanHit(Target_t& tTarget, CTFPlayer* pLocal, CTFWeaponBas
 
 			if (bMain && Vars::Visuals::Hitbox::BoundsEnabled.Value & Vars::Visuals::Hitbox::BoundsEnabledEnum::AimPoint)
 			{
+				// Static aimpoint box size
+				const Vec3 vStaticSize(2.5f, 2.5f, 2.5f);
+
 				if (Vars::Colors::BoundHitboxEdge.Value.a || Vars::Colors::BoundHitboxFace.Value.a)
-					pBoxes->emplace_back(vTarget, tInfo.m_vHull * -1, tInfo.m_vHull, Vec3(), I::GlobalVars->curtime + (Vars::Visuals::Simulation::Timed.Value ? flProjectileTime : Vars::Visuals::Hitbox::DrawDuration.Value), Vars::Colors::BoundHitboxEdge.Value, Vars::Colors::BoundHitboxFace.Value);
+					pBoxes->emplace_back(vTarget, vStaticSize * -1, vStaticSize, Vec3(),
+						I::GlobalVars->curtime + (Vars::Visuals::Simulation::Timed.Value ? flProjectileTime : Vars::Visuals::Hitbox::DrawDuration.Value),
+						Vars::Colors::BoundHitboxEdge.Value, Vars::Colors::BoundHitboxFace.Value);
+
 				if (Vars::Colors::BoundHitboxEdgeClipped.Value.a || Vars::Colors::BoundHitboxFaceClipped.Value.a)
-					pBoxes->emplace_back(vTarget, tInfo.m_vHull * -1, tInfo.m_vHull, Vec3(), I::GlobalVars->curtime + (Vars::Visuals::Simulation::Timed.Value ? flProjectileTime : Vars::Visuals::Hitbox::DrawDuration.Value), Vars::Colors::BoundHitboxEdgeClipped.Value, Vars::Colors::BoundHitboxFaceClipped.Value, true);
+					pBoxes->emplace_back(vTarget, vStaticSize * -1, vStaticSize, Vec3(),
+						I::GlobalVars->curtime + (Vars::Visuals::Simulation::Timed.Value ? flProjectileTime : Vars::Visuals::Hitbox::DrawDuration.Value),
+						Vars::Colors::BoundHitboxEdgeClipped.Value, Vars::Colors::BoundHitboxFaceClipped.Value, true);
 
 				/*
 				if (Vars::Debug::Info.Value && tTarget.m_nAimedHitbox == HITBOX_HEAD) // huntsman head
@@ -1732,7 +1740,7 @@ bool CAimbotProjectile::RunMain(CTFPlayer* pLocal, CTFWeaponBase* pWeapon, CUser
 	if (F::AimbotGlobal.ShouldHoldAttack(pWeapon))
 		pCmd->buttons |= IN_ATTACK;
 	if (!Vars::Aimbot::General::AimType.Value
-		|| !F::AimbotGlobal.ShouldAim() && nWeaponID != TF_WEAPON_PIPEBOMBLAUNCHER && nWeaponID != TF_WEAPON_CANNON && nWeaponID != TF_WEAPON_FLAMETHROWER)
+		/* || !F::AimbotGlobal.ShouldAim() && nWeaponID != TF_WEAPON_PIPEBOMBLAUNCHER && nWeaponID != TF_WEAPON_CANNON && nWeaponID != TF_WEAPON_FLAMETHROWER*/)
 		return false;
 
 	auto vTargets = SortTargets(pLocal, pWeapon);

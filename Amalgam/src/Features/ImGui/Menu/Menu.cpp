@@ -652,13 +652,14 @@ void CMenu::MenuVisuals(int iTab)
 						FColorPicker(Vars::Colors::TeamBlu, 0, FColorPickerEnum::Middle);
 					}
 					FColorPicker(Vars::Colors::Local, 0, FColorPickerEnum::Left);
-					FColorPicker(Vars::Colors::Target, 0, FColorPickerEnum::Middle);
-					FColorPicker(Vars::Colors::Health, 0, FColorPickerEnum::Left);
-					FColorPicker(Vars::Colors::Ammo, 0, FColorPickerEnum::Middle);
-					FColorPicker(Vars::Colors::Money, 0, FColorPickerEnum::Left);
-					FColorPicker(Vars::Colors::Powerup, 0, FColorPickerEnum::Middle);
-					FColorPicker(Vars::Colors::NPC, 0, FColorPickerEnum::Left);
-					FColorPicker(Vars::Colors::Halloween, 0, FColorPickerEnum::Middle);
+					FColorPicker(Vars::Colors::Friend, 0, FColorPickerEnum::Middle);
+					FColorPicker(Vars::Colors::Target, 0, FColorPickerEnum::Left);
+					FColorPicker(Vars::Colors::Health, 0, FColorPickerEnum::Middle);
+					FColorPicker(Vars::Colors::Ammo, 0, FColorPickerEnum::Left);
+					FColorPicker(Vars::Colors::Money, 0, FColorPickerEnum::Middle);
+					FColorPicker(Vars::Colors::Powerup, 0, FColorPickerEnum::Left);
+					FColorPicker(Vars::Colors::NPC, 0, FColorPickerEnum::Middle);
+					FColorPicker(Vars::Colors::Halloween, 0, FColorPickerEnum::Left);
 				} EndSection();
 				if (Section("Dormancy", 8))
 				{

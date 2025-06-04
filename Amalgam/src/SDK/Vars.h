@@ -153,7 +153,7 @@ public:
 
 #define NONE 0
 #define VISUAL (1 << 31)
-#define NOSAVE (1 << 30)
+#define NOSAVE (NONE)
 #define NOBIND (1 << 29)
 #define DEBUGVAR (1 << 28)
 
@@ -211,6 +211,7 @@ namespace Vars
 		CVar(Enemy, "Enemy color", Color_t(225, 60, 60, 255), VISUAL);
 		CVar(Team, "Team color", Color_t(75, 175, 225, 255), VISUAL);
 		CVar(Local, "Local color", Color_t(255, 255, 255, 255), VISUAL);
+		CVar(Friend, "Friend color", Color_t(30, 255, 0, 255), VISUAL);
 		CVar(Target, "Target color", Color_t(255, 0, 0, 255), VISUAL);
 		CVar(Health, "Health color", Color_t(0, 225, 75, 255), VISUAL);
 		CVar(Ammo, "Ammo color", Color_t(127, 127, 127, 255), VISUAL);

@@ -49,9 +49,9 @@ void CAimbot::RunMain(CTFPlayer* pLocal, CTFWeaponBase* pWeapon, CUserCmd* pCmd)
 	}
 
 	m_bRan = false;
-	if (abs(G::AimTarget.m_iTickCount - I::GlobalVars->tickcount) > G::AimTarget.m_iDuration)
+	if (abs(G::AimTarget.m_iTickCount) > G::AimTarget.m_iDuration)
 		G::AimTarget = {};
-	if (abs(G::AimPoint.m_iTickCount - I::GlobalVars->tickcount) > G::AimPoint.m_iDuration)
+	if (abs(G::AimPoint.m_iTickCount) > G::AimPoint.m_iDuration)
 		G::AimPoint = {};
 
 	if (pCmd->weaponselect)
